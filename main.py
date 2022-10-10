@@ -33,6 +33,7 @@ st.write("1. In the table below, mark the elements of your meal you'd like to pa
          "will appear in the table to the right.")
 st.write("2. In the second table, on the right, mark anything in your meal you think should be weighted more heavily "
          "when selecting a wine to pair.")
+st.write("3. Scroll down to see wines that match your selections. The higher the number, the better the match!")
 st.write('')
 st.write('')
 
