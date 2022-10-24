@@ -82,7 +82,8 @@ try:
     value_list = display.values
     for i in range(len(wine_list)):
         match = int((value_list[i] * 100) / (len(selections_list) * 2))
-        st.write(wine_list[i] + ' (' + str(match) + '%)')
+        with st.expander(wine_list[i] + ' (' + str(match) + '%)'):
+            st.write("details here")
         st.progress(match)
 except NameError:
     st.write('Nothing selected yet')
