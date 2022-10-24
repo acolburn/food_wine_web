@@ -8,6 +8,8 @@ import streamlit as st
 import pandas as pd
 from st_aggrid import GridOptionsBuilder, AgGrid, ColumnsAutoSizeMode
 
+import wine_type_list
+
 
 def build_grid(dataframe):
     gb = GridOptionsBuilder.from_dataframe(dataframe)
@@ -80,10 +82,22 @@ try:
     wine_list = display.index.tolist()
     # and this provides a list of the numbers, i.e., the sum of the values for each wine
     value_list = display.values
+    # we will go through each wine type in the wine_type_list:
     for i in range(len(wine_list)):
         match = int((value_list[i] * 100) / (len(selections_list) * 2))
+        # example_list finds the list of examples for an individual wine type
+        example_list = wine_type_list.wine_types[wine_list[i]]
+        s = "EXAMPLES: "
+        # we convert the list into a formatted string
+        for item in example_list:
+            if example_list.index(item) < len(example_list)-1:
+                s += item + ", "
+            else:
+                s += "and " + item
+        # print the wine name, allow user to click on the name to see examples
         with st.expander(wine_list[i] + ' (' + str(match) + '%)'):
-            st.write("details here")
+            st.write(s)
+        # progress bar
         st.progress(match)
 except NameError:
     st.write('Nothing selected yet')
