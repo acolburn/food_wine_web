@@ -99,5 +99,6 @@ try:
             st.write(s)
         # progress bar
         st.progress(match)
+        st.metric (label=wine_list[i], value=str(match)+"%")
 except NameError:
     st.write('Nothing selected yet')
