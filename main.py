@@ -87,7 +87,7 @@ try:
         match = int((value_list[i] * 100) / (len(selections_list) * 2))
         # example_list finds the list of examples for an individual wine type
         example_list = wine_type_list.wine_types[wine_list[i]]
-        s = "EXAMPLES: "
+        s = ""
         # we convert the list into a formatted string
         for item in example_list:
             if example_list.index(item) < len(example_list)-1:
@@ -95,10 +95,10 @@ try:
             else:
                 s += "and " + item        
         # progress bar
-        st.progress(match)
+        # st.progress(match)
         st.metric (label=wine_list[i], value=str(match)+"% match")
         # print the wine name, allow user to click on the name to see examples
-        with st.expander(wine_list[i] + ' (' + str(match) + '%)'):
+        with st.expander(wine_list[i] + ' examples'):
             st.write(s)
 except NameError:
     st.write('Nothing selected yet')
