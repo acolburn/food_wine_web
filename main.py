@@ -93,12 +93,12 @@ try:
             if example_list.index(item) < len(example_list)-1:
                 s += item + ", "
             else:
-                s += "and " + item
+                s += "and " + item        
+        # progress bar
+        st.progress(match)
+        st.metric (label=wine_list[i], value=str(match)+"% match")
         # print the wine name, allow user to click on the name to see examples
         with st.expander(wine_list[i] + ' (' + str(match) + '%)'):
             st.write(s)
-        # progress bar
-        st.progress(match)
-        st.metric (label=wine_list[i], value=str(match)+"%")
 except NameError:
     st.write('Nothing selected yet')
