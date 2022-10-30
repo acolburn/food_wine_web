@@ -8,8 +8,8 @@ meat,burger with ketchup,,1,2,0,0,0,0,0,0,0
 meat,lamb,,2,2,1,0,0,0,0,0,0
 meat,ham,,0,2,0,2,0,0,0,2,2
 meat,pork,roast; tenderloin; pork chop,1,2,0,1,0,0,1,0,0
-meat,chicken or turkey breast,,0,1,2,1,2,1,1,0,0
-meat,chicken or turkey legs/thighs,,0,2,2,1,2,1,1,0,0
+meat,chicken (white meat),,0,1,2,1,2,1,1,0,0
+meat,chicken (dark meat),,0,2,2,1,2,1,1,0,0
 meat,duck,,0,1,2,1,2,1,0,1,0
 meat,mollusk,oyster; mussel; clam,0,0,0,0,0,1,2,0,0
 meat,fish,,0,0,0,0,1,2,1,0,2
@@ -38,12 +38,14 @@ pasta,pasta with tomato sauce,,2,0,0,0,0,0,0,0,0
 pasta,pasta with pesto,,0,0,0,0,2,1,0,0,0
 pasta,pasta with meat sauce,,2,0,0,0,0,0,0,0,0
 pasta,spicy pasta,,0,0,0,0,0,1,0,2,0
+pasta,lasagna,,0,2,0,0,0,0,0,0,0
 vegetable,corn,,0,0,0,2,2,1,0,0,0
 vegetable,green beans,,0,0,0,0,2,0,0,0,0
 vegetable,roasted vegetables,,2,2,2,0,0,0,0,0,0
 vegetable,"spinach, other greens",,0,0,0,2,1,0,0,0,0
 vegetable,"tomatoes, cooked",,0,2,0,2,0,0,0,0,0
 vegetable,"tomatoes, raw",,0,0,0,0,0,1,0,0,0
+vegetable,vegetable side dishes (general),,0,0,0,0,1,1,0,0,0
 vegetable,green vegetables,green beans; kale; lettuce,0,0,0,0,0,2,1,0,0
 vegetable,garden salad,,0,0,0,0,1,0,0,0,0
 vegetable,root vegetables,turnip; squash; pumpkin; carrot,0,0,0,1,1,0,0,1,0
