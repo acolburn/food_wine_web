@@ -1,32 +1,74 @@
 category,name,examples,bold red,medium red,light red,rose,rich white,light white,sparkling,sweet white,dessert
-meat,lean red meat,beef; lamb; venison,1,2,0,0,0,0,0,0,0
-meat,fatty red meat,beef; lamb; venison,2,1,0,0,0,0,0,0,0
-meat,cured meat,salami; prosciutto; bacon,1,1,2,1,0,0,1,2,1
+meat,lean red meat,,1,2,0,0,0,0,0,0,0
+meat,fatty red meat,prime rib,2,1,0,0,0,0,0,0,0
+meat,cured meat,salami; prosciutto; bacon; sausage,1,1,2,1,0,0,1,1,0
+meat,tri-tip,,0,2,0,0,0,0,0,0,0
+meat,burger (plain),,0,2,0,0,0,0,0,0,0
+meat,burger with ketchup,,1,2,0,0,0,0,0,0,0
+meat,lamb,,2,2,1,0,0,0,0,0,0
+meat,ham,,0,2,0,2,0,0,0,2,2
 meat,pork,roast; tenderloin; pork chop,1,2,0,1,0,0,1,0,0
-meat,poultry,chicken; duck; turkey,0,1,2,1,2,1,1,0,0
+meat,chicken or turkey breast,,0,1,2,1,2,1,1,0,0
+meat,chicken or turkey legs/thighs,,0,2,2,1,2,1,1,0,0
+meat,duck,,0,1,2,1,2,1,0,1,0
 meat,mollusk,oyster; mussel; clam,0,0,0,0,0,1,2,0,0
-meat,fish,tuna; trout; cod; bass,0,0,0,0,1,2,1,0,0
+meat,fish,,0,0,0,0,1,2,1,0,2
 meat,shellfish,shrimp; crab; lobster,0,0,0,1,2,1,0,1,0
 preparation,grilled,,2,1,1,0,0,0,1,1,0
 preparation,sauteed or fried,,0,0,2,1,1,1,1,0,0
 preparation,smoked, ,1,2,1,1,0,0,1,0,1
 preparation,roasted, ,2,1,1,1,0,0,0,1,0
 preparation,poached or steamed, ,0,0,0,0,1,2,1,1,0
+sauces,alfredo,,0,0,0,0,2,0,0,0,0
+sauces,bbq,,2,0,0,0,0,0,0,0,0
+sauces,bechamel,,0,0,0,0,0,2,0,0,0
+sauces,cheese,,0,0,0,0,2,0,0,0,0
+sauces,hollandaise,,0,0,0,2,0,0,0,2,0
+sauces,marinara/red sauce,,0,2,0,0,0,0,0,0,0
+sauces,peanut sauce,,0,0,0,0,0,2,0,0,0
+sauces,pesto,,0,0,0,0,0,2,0,0,0
 dairy,soft cheese and cream,brie; marscapone; crème fraiche,0,1,2,1,2,1,1,1,1
 dairy,pungent cheese,blue; gorgonzola; stilton; roquefort,1,2,0,1,0,1,1,1,2
 dairy,hard cheese,cheddar; pecorino; manchego; asiago; parmesan,2,1,0,1,1,0,1,0,0
-vegetable,alliums,onion; shallot; garlic; scallion,1,2,1,1,1,1,1,1,0
+pizza,cheese pizza,,0,2,0,0,0,0,0,0,0
+pizza,pepperoni pizza,,0,2,0,0,0,0,0,0,0
+pizza,sausage pizza,,0,2,0,0,0,0,0,0,0
+pizza,mushroom pizza,,0,2,0,0,0,0,0,0,0
+pasta,pasta with tomato sauce,,2,0,0,0,0,0,0,0,0
+pasta,pasta with pesto,,0,0,0,0,2,1,0,0,0
+pasta,pasta with meat sauce,,2,0,0,0,0,0,0,0,0
+pasta,spicy pasta,,0,0,0,0,0,1,0,2,0
+vegetable,corn,,0,0,0,2,2,1,0,0,0
+vegetable,green beans,,0,0,0,0,2,0,0,0,0
+vegetable,roasted vegetables,,2,2,2,0,0,0,0,0,0
+vegetable,"spinach, other greens",,0,0,0,2,1,0,0,0,0
+vegetable,"tomatoes, cooked",,0,2,0,2,0,0,0,0,0
+vegetable,"tomatoes, raw",,0,0,0,0,0,1,0,0,0
 vegetable,green vegetables,green beans; kale; lettuce,0,0,0,0,0,2,1,0,0
-vegetable,root vegetables,turnip; squash; pumpkin; carrot,0,0,0,1,0,0,0,1,0
-vegetable,nightshades,tomato; eggplant; bell pepper,1,2,0,1,0,0,0,1,0
-vegetable,funghi,mushrooms; crimini; shitake,1,2,2,0,2,0,0,0,0
+vegetable,garden salad,,0,0,0,0,1,0,0,0,0
+vegetable,root vegetables,turnip; squash; pumpkin; carrot,0,0,0,1,1,0,0,1,0
+vegetable,mushrooms,crimini; shitake,1,2,2,0,2,0,0,0,0
 vegetable,nuts and seeds,peanut; almond; pecan; sesame,0,0,1,1,1,1,1,2,0
-vegetable,beans and peas,lentil; navy; pinto; chickpea,0,1,0,1,0,2,1,0,0
+vegetable,beans,lentil; navy; pinto; chickpea,0,1,0,1,0,2,1,0,0
 seasoning,black pepper,,2,1,0,0,0,0,0,0,0
 seasoning,red pepper,ancho; chili; aleppo; chipotle,1,2,0,1,0,1,1,1,0
 seasoning,hot and spicy,hot sauce; habanero; sichuan,0,0,0,0,0,1,1,2,0
-seasoning,herbs,thyme; oregano; basil; tarragon,0,1,1,1,1,2,0,0,0
-seasoning,baking spices,cinnamon; clove; allspice; mace,0,1,0,1,0,0,0,1,2
+seasoning,basil,,0,0,0,0,0,2,2,0,0
+seasoning,cardamom,,0,2,0,0,2,2,0,0,0
+seasoning,cilantro,,0,0,2,0,0,2,0,0,0
+seasoning,cinnamon,,0,2,0,0,2,0,0,0,0
+seasoning,cumin,,0,0,0,2,0,0,0,0,0
+seasoning,dill,,0,0,0,0,0,0,0,0,0
+seasoning,garlic,,1,0,0,1,0,2,0,0,0
+seasoning,ginger,,0,2,0,0,0,2,0,0,0
+seasoning,mint,,0,0,0,0,0,0,0,0,0
+seasoning,nutmeg,,0,2,0,0,0,2,0,0,0
+seasoning,oregano,,0,0,0,0,0,0,0,0,0
+seasoning,rosemary,,0,0,0,0,0,2,0,0,0
+seasoning,sage,,0,0,0,0,0,2,0,0,0
+seasoning,tarragon,,0,0,0,0,0,2,0,0,0
+seasoning,thyme,,0,0,0,0,0,2,0,0,0
+seasoning,turmeric,,0,0,0,2,0,2,0,0,0
 seasoning,exotic aromatic spices,anise; turmeric; saffron; fennel; ginger,0,2,1,1,0,0,1,2,0
 starch,white starch,flour; white rice; pasta; bread; tortillas,1,1,1,1,1,1,1,1,1
 starch,whole wheat grains,quinoa; farro; brown rice,0,0,1,1,1,0,0,2,0
