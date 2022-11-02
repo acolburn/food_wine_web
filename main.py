@@ -10,8 +10,28 @@ from st_aggrid import GridOptionsBuilder, AgGrid, ColumnsAutoSizeMode
 
 import wine_type_list
 
+def print_header():
+    # st.title('Cool Title or Logo Here')
+    # following code needed to center the image
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.write('')
+    with col2:
+        st.image("logo.jpg")
+    with col3:
+        st.write('')
 
-def build_grid(dataframe):
+    st.write("1. In the table below, mark the elements of your meal you'd like to pair with wine. The items you select "
+             "will appear in the table to the right.")
+    st.write(
+        "2. In the second table, on the right, mark anything in your meal you think should be weighted more heavily "
+        "when selecting a wine to pair.")
+    st.write("3. Scroll down to see wines that match your selections. The higher the number, the better the match!")
+    st.write('')
+    st.write('')
+
+
+def build_left_grid(dataframe):
     gb = GridOptionsBuilder.from_dataframe(dataframe)
     gb.configure_selection(selection_mode='multiple', use_checkbox=True, rowMultiSelectWithClick=True)
     grid_options = gb.build()
@@ -20,42 +40,70 @@ def build_grid(dataframe):
     return grid
 
 
+# def build_right_grid(selections):
+#     # if user selected anything
+#     if len(selections) > 0:
+#         df_selection_names = df_selections[['name']]  # Make a dataframe with just the 'name' column
+#         grid = build_left_grid(df_selection_names) # display selections in a grid on the right side of page
+#         return grid
+#     else:
+#         st.write('Nothing selected to display')
+
+
+
+
 # main
-# st.title('Cool Title or Logo Here')
-# following code needed to center the image
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.write('')
-with col2:
-    st.image("logo.jpg")
-with col3:
-    st.write('')
+print_header()
 
-st.write("1. In the table below, mark the elements of your meal you'd like to pair with wine. The items you select "
-         "will appear in the table to the right.")
-st.write("2. In the second table, on the right, mark anything in your meal you think should be weighted more heavily "
-         "when selecting a wine to pair.")
-st.write("3. Scroll down to see wines that match your selections. The higher the number, the better the match!")
-st.write('')
-st.write('')
+col_l, col_r = st.columns([5, 3])  # col_l is larger
 
-col_l, col_r = st.columns([4, 1])  # col_l is larger
-
+# ********** PRINT THE LEFT GRID *********
+# convert the spreadsheet into a dataframe
 df_everything = pd.read_csv("food_wine_pairing.csv", encoding='unicode_escape')
-df = df_everything[['category', 'name', 'examples']]
-
+# prep the dataframe for display by parsing it into just the columns 'category' and 'name'
+df = df_everything[['category', 'name']]
+# and display the parsed dataframe in a grid, on the left side of the page
 with col_l:
-    grid_main = build_grid(df)
+    grid_main = build_left_grid(df)
 
-selections = grid_main['selected_rows']  # selected is technically a list variable, but it's in a complex form that
+# this line captures the items the user checked
+# selections is technically a list variable, but it's in a complex form that
 # can easily become a DataFrame
-with col_r:
-    if len(selections) > 0:
-        df_selections = pd.DataFrame(selections)  # Pass the selected rows to a new dataframe df
-        df_selection_names = df_selections[['name']]  # Make a dataframe with just the 'name' column
-        grid_selections = build_grid(df_selection_names)
-    else:
-        st.write('Nothing selected to display')
+selections = grid_main['selected_rows']
+
+# ********* PRINT THE RIGHT GRID **********
+if len(selections) > 0:  # if user selected anything
+    df_selections = pd.DataFrame(selections)  # pass the selected rows to a new dataframe
+    with col_r:
+        # if user selected anything
+        if len(selections) > 0:
+            df_selection_names = df_selections[['name']]  # Make a dataframe with just the 'name' column
+            grid_selections = build_left_grid(df_selection_names)  # display selections in a grid on the right side of page
+else:
+    st.write('Nothing selected to display')
+
+# ********** PRINT HEADER **********
+st.write("## SPECIFIC SUGGESTIONS")
+
+if len(selections) > 0:  # if user selected anything
+    # number of items in df_selections = df_selections.shape[0]
+    # so, in other words, we are looping through all the items the user selected
+    for i in range(df_selections.shape[0]):
+        # this line finds the 'name' cell's value for an item
+        sel = df_selections.loc[i]['name']
+        # this line finds the row 'sel' in df_everything
+        row = df_everything.loc[df['name'] == sel]
+        # this line returns a [list] to the aList variable
+        aList = row['specific suggestions'].values
+        # this line turns the list into a comma separated string, assuming it's not empty
+        # lists that are empty, or NaN in this case, throw a KeyError
+        # pd.isna(aList) returns True if the value is NaN ... we don't want those
+        # we only want the ones where something is present in the 'specific suggestions' cell
+        if not pd.isna(aList):
+            st.write(','.join(aList).upper()+' is suggested for '+sel.upper())
+
+# ********** PRINT HEADER **********
+st.write("## GENERAL SUGGESTIONS")
 
 # Everything user selected, as a list
 # BUT if user hasn't selected anything, this throws a NameError--hence the try/except
@@ -90,13 +138,13 @@ try:
         s = ""
         # we convert the list into a formatted string
         for item in example_list:
-            if example_list.index(item) < len(example_list)-1:
+            if example_list.index(item) < len(example_list) - 1:
                 s += item + ", "
             else:
-                s += "and " + item        
-        # progress bar
+                s += "and " + item
+                # progress bar
         # st.progress(match)
-        st.metric (label=wine_list[i], value=str(match)+"% match")
+        st.metric(label=wine_list[i], value=str(match) + "% match")
         # print the wine name, allow user to click on the name to see examples
         with st.expander(wine_list[i] + ' examples'):
             st.write(s)
