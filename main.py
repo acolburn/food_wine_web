@@ -62,7 +62,7 @@ df_everything = pd.read_csv("food_wine_pairing.csv", encoding='unicode_escape')
 # prep the dataframe for display by parsing it into just the columns 'category' and 'name'
 df = df_everything[['category', 'name']]
 with col_l:
-    with st.expanded("Meat"):
+    with st.expander("Meat"):
         grid_meat = build_grid(df.query("category == 'meat'"))
 # and display the parsed dataframe in a grid, on the left side of the page
 with col_l:
