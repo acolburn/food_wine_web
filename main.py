@@ -61,10 +61,39 @@ col_l, col_r = st.columns([5, 3])  # col_l is larger
 df_everything = pd.read_csv("food_wine_pairing.csv", encoding='unicode_escape')
 # prep the dataframe for display by parsing it into just the columns 'category' and 'name'
 df = df_everything[['category', 'name']]
+# and display parsed versions of the dataframe on the left side of the page
 with col_l:
     with st.expander("Meat"):
         grid_meat = build_grid(df.query("category == 'meat'"))
-meat_selections = grid_meat['selected_rows']
+    meat_selections = grid_meat['selected_rows']
+    with st.expander("Meat Cooking Method"):
+        grid_preparation = build_grid(df.query("category == 'preparation'"))
+    preparation_selections = grid_preparation['selected_rows']
+    with st.expander("Sauces"):
+        grid_sauces = build_grid(df.query("category == 'sauces'"))
+    sauces_selections = grid_sauces['selected_rows']
+    with st.expander("Dairy"):
+        grid_dairy = build_grid(df.query("category == 'dairy'"))
+    dairy_selections = grid_dairy['selected_rows']
+    with st.expander("Pizza"):
+        grid_pizza = build_grid(df.query("category == 'pizza'"))
+    pizza_selections = grid_pizza['selected_rows']
+    with st.expander("Pasta"):
+        grid_past = build_grid(df.query("category == 'pizza'"))
+    pizza_selections = grid_pizza['selected_rows']
+    with st.expander("Vegetables"):
+        grid_vegetables = build_grid(df.query("category == 'vegetable'"))
+    vegetables_selections = grid_vegetables['selected_rows']
+    with st.expander("Seasonings"):
+        grid_seasonings = build_grid(df.query("category == 'seasoning'"))
+    seasonings_selections = grid_seasonings['selected_rows']
+    with st.expander("Starches"):
+        grid_starches = build_grid(df.query("category == 'starch'"))
+    starches_selections = grid_starches['selected_rows']
+    with st.expander("Sweets"):
+        grid_sweets = build_grid(df.query("category == 'sweets'"))
+    sweets_selections = grid_sweets['selected_rows']
+    
 # and display the parsed dataframe in a grid, on the left side of the page
 with col_l:
     grid_main = build_grid(df)
