@@ -79,7 +79,7 @@ with col_l:
         grid_pizza = build_grid(df.query("category == 'pizza'"))
     pizza_selections = grid_pizza['selected_rows']
     with st.expander("Pasta"):
-        grid_pasta = build_grid(df.query("category == 'pizza'"))
+        grid_pasta = build_grid(df.query("category == 'pasta'"))
     pasta_selections = grid_pasta['selected_rows']
     with st.expander("Vegetables"):
         grid_vegetables = build_grid(df.query("category == 'vegetable'"))
