@@ -66,33 +66,53 @@ with col_l:
     with st.expander("Meat"):
         grid_meat = build_grid(df.query("category == 'meat'"))
     meat_selections = grid_meat['selected_rows']
+    if len(meat_selections) > 0: # if user selected any meats
+        df_meat_selections = pd.DataFrame(meat_selections) # pass selected rows to new dataframe
     with st.expander("Meat Cooking Method"):
         grid_preparation = build_grid(df.query("category == 'preparation'"))
     preparation_selections = grid_preparation['selected_rows']
+    if len(preparation_selections) > 0: 
+        df_preparation_selections = pd.DataFrame(preparation_selections)
     with st.expander("Sauces"):
         grid_sauces = build_grid(df.query("category == 'sauces'"))
     sauces_selections = grid_sauces['selected_rows']
+    if len(sauce_selections) > 0: 
+        df_sauce_selections = pd.DataFrame(sauce_selections)
     with st.expander("Dairy"):
         grid_dairy = build_grid(df.query("category == 'dairy'"))
     dairy_selections = grid_dairy['selected_rows']
+    if len(dairy_selections) > 0: 
+        df_dairy_selections = pd.DataFrame(dairy_selections)
     with st.expander("Pizza"):
         grid_pizza = build_grid(df.query("category == 'pizza'"))
     pizza_selections = grid_pizza['selected_rows']
+    if len(pizza_selections) > 0: 
+        df_pizza_selections = pd.DataFrame(pizza_selections)
     with st.expander("Pasta"):
         grid_pasta = build_grid(df.query("category == 'pasta'"))
     pasta_selections = grid_pasta['selected_rows']
+    if len(pasta_selections) > 0: 
+        df_pasta_selections = pd.DataFrame(pasta_selections)
     with st.expander("Vegetables"):
         grid_vegetables = build_grid(df.query("category == 'vegetable'"))
     vegetables_selections = grid_vegetables['selected_rows']
+    if len(vegetables_selections) > 0: 
+        df_vegetables_selections = pd.DataFrame(vegetables_selections)
     with st.expander("Seasonings"):
         grid_seasonings = build_grid(df.query("category == 'seasoning'"))
     seasonings_selections = grid_seasonings['selected_rows']
+    if len(seasonings_selections) > 0: 
+        df_seasonings_selections = pd.DataFrame(seasonings_selections)
     with st.expander("Starches"):
         grid_starches = build_grid(df.query("category == 'starch'"))
     starches_selections = grid_starches['selected_rows']
+    if len(starches_selections) > 0: 
+        df_starches_selections = pd.DataFrame(starches_selections)
     with st.expander("Sweets"):
         grid_sweets = build_grid(df.query("category == 'sweets'"))
     sweets_selections = grid_sweets['selected_rows']
+    if len(sweets_selections) > 0: 
+        df_sweets_selections = pd.DataFrame(sweets_selections)
     
 # and display the parsed dataframe in a grid, on the left side of the page
 with col_l:
@@ -105,8 +125,6 @@ selections = grid_main['selected_rows']
 
 # ********* PRINT THE RIGHT GRID **********
 with col_r:
-    if len(meat_selections) > 0: # if user selected any meats
-        df_meat_selections = pd.DataFrame(meat_selections) # pass selected rows to new dataframe
         
     if len(selections) > 0:  # if user selected anything
         df_selections = pd.DataFrame(selections)  # pass the selected rows to a new dataframe
