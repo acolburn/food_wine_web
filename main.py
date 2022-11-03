@@ -126,25 +126,32 @@ with col_l:
         df_selections_list.append(df_sweets_selections)
     
 # and display the parsed dataframe in a grid, on the left side of the page
-with col_l:
-    grid_main = build_grid(df)
+# with col_l:
+#     grid_main = build_grid(df)
 
 # this line captures the items the user checked
 # selections is technically a list variable, but it's in a complex form that
 # can easily become a DataFrame
-selections = grid_main['selected_rows']
+# selections = grid_main['selected_rows']
 
 # ********* PRINT THE RIGHT GRID **********
 with col_r:
-        
-    if len(selections) > 0:  # if user selected anything
-        df_selections = pd.DataFrame(selections)  # pass the selected rows to a new dataframe
-        if len(meat_selections) > 0:
-            df_selections = pd.concat([df_selections, df_meat_selections])
-        df_selection_names = df_selections[['name']]  # Make a dataframe with just the 'name' column
-        grid_selections = build_grid(df_selection_names)  # display selections in a grid on the right side of page
-    else:  # user has not selected anything
+    df_selections = pd.DataFrame()
+    for item in df_selections_list:
+        df_selections = pd.concat([df_selections, item])
+    if len(df_selections_list) > 0: # if user selected anything
+        df_selection_names = df_selections[['name']] # Make a dataframe with just the 'name' column
+        grid_selections = build_grid(df_selection_names) # display sections in right side grid
+    else: # user has not selected anything
         st.write('Nothing selected to display')
+#     if len(selections) > 0:  # if user selected anything
+#         df_selections = pd.DataFrame(selections)  # pass the selected rows to a new dataframe
+#         if len(meat_selections) > 0:
+#             df_selections = pd.concat([df_selections, df_meat_selections])
+#         df_selection_names = df_selections[['name']]  # Make a dataframe with just the 'name' column
+#         grid_selections = build_grid(df_selection_names)  # display selections in a grid on the right side of page
+#     else:  # user has not selected anything
+#         st.write('Nothing selected to display')
 
 # ********** PRINT HEADER **********
 st.write("## SPECIFIC SUGGESTIONS")
