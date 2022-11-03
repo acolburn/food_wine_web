@@ -22,10 +22,10 @@ def print_header():
     with col3:
         st.write('')
 
-    st.write("1. In the table below, mark the elements of your meal you'd like to pair with wine. The items you select "
+    st.write("1. First, in the dropdown categories below, mark the elements of your meal you'd like to pair with wine. The items you select "
              "will appear in the table to the right.")
     st.write(
-        "2. In the second table, on the right, mark anything in your meal you think should be weighted more heavily "
+        "2. Next, in the table on the right, mark anything in your meal you think should be weighted more heavily "
         "when selecting a wine to pair.")
     st.write("3. Scroll down to see wines that match your selections. The higher the number, the better the match!")
     st.write('')
