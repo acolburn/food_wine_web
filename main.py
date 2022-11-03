@@ -10,6 +10,7 @@ from st_aggrid import GridOptionsBuilder, AgGrid, ColumnsAutoSizeMode
 
 import wine_type_list
 
+
 def print_header():
     # st.title('Cool Title or Logo Here')
     # following code needed to center the image
@@ -31,7 +32,7 @@ def print_header():
     st.write('')
 
 
-def build_left_grid(dataframe):
+def build_grid(dataframe):
     gb = GridOptionsBuilder.from_dataframe(dataframe)
     gb.configure_selection(selection_mode='multiple', use_checkbox=True, rowMultiSelectWithClick=True)
     grid_options = gb.build()
@@ -50,8 +51,6 @@ def build_left_grid(dataframe):
 #         st.write('Nothing selected to display')
 
 
-
-
 # main
 print_header()
 
@@ -64,7 +63,7 @@ df_everything = pd.read_csv("food_wine_pairing.csv", encoding='unicode_escape')
 df = df_everything[['category', 'name']]
 # and display the parsed dataframe in a grid, on the left side of the page
 with col_l:
-    grid_main = build_left_grid(df)
+    grid_main = build_grid(df)
 
 # this line captures the items the user checked
 # selections is technically a list variable, but it's in a complex form that
@@ -72,15 +71,15 @@ with col_l:
 selections = grid_main['selected_rows']
 
 # ********* PRINT THE RIGHT GRID **********
-if len(selections) > 0:  # if user selected anything
-    df_selections = pd.DataFrame(selections)  # pass the selected rows to a new dataframe
-    with col_r:
+with col_r:
+    if len(selections) > 0:  # if user selected anything
+        df_selections = pd.DataFrame(selections)  # pass the selected rows to a new dataframe
         # if user selected anything
         if len(selections) > 0:
             df_selection_names = df_selections[['name']]  # Make a dataframe with just the 'name' column
-            grid_selections = build_left_grid(df_selection_names)  # display selections in a grid on the right side of page
-else:
-    st.write('Nothing selected to display')
+            grid_selections = build_grid(df_selection_names)  # display selections in a grid on the right side of page
+    else:  # user has not selected anything
+        st.write('Nothing selected to display')
 
 # ********** PRINT HEADER **********
 st.write("## SPECIFIC SUGGESTIONS")
@@ -100,7 +99,9 @@ if len(selections) > 0:  # if user selected anything
         # pd.isna(aList) returns True if the value is NaN ... we don't want those
         # we only want the ones where something is present in the 'specific suggestions' cell
         if not pd.isna(aList):
-            st.write(','.join(aList).upper()+' is suggested for '+sel.upper())
+            st.markdown("**" + ','.join(aList).upper() + "** is suggested for **" + sel.upper() + "**")
+else:
+    st.write('No specific suggestions yet.')
 
 # ********** PRINT HEADER **********
 st.write("## GENERAL SUGGESTIONS")
@@ -123,16 +124,21 @@ try:
     for item in selections_list:
         temp = df_everything.loc[df['name'] == item]
         df_out = pd.concat([df_out, temp])
+
+    # * * Remove selections that don't have numbered values in 'bold red' column! * *:
+    # df_out_parsed = df_out[df_out['bold red'] != ''] ... nope, had to use next line
+    df_out_parsed = df_out.dropna(subset=['bold red'])
+
     # .sum() adds the values in each column
     # .sort_values(ascending=False) sorts the values (duh) and displays from highest to lowest
-    display = df_out.sum(numeric_only=True).sort_values(ascending=False)
+    display = df_out_parsed.sum(numeric_only=True).sort_values(ascending=False)
     # this provides a list of the wines themselves; they're the indexes on the dataframe called "display":
     wine_list = display.index.tolist()
     # and this provides a list of the numbers, i.e., the sum of the values for each wine
     value_list = display.values
     # we will go through each wine type in the wine_type_list:
     for i in range(len(wine_list)):
-        match = int((value_list[i] * 100) / (len(selections_list) * 2))
+        match = int((value_list[i] * 100) / (df_out_parsed.shape[0] * 2))
         # example_list finds the list of examples for an individual wine type
         example_list = wine_type_list.wine_types[wine_list[i]]
         s = ""
