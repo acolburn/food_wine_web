@@ -76,8 +76,8 @@ with col_l:
     with st.expander("Sauces"):
         grid_sauces = build_grid(df.query("category == 'sauces'"))
     sauces_selections = grid_sauces['selected_rows']
-    if len(sauce_selections) > 0: 
-        df_sauce_selections = pd.DataFrame(sauce_selections)
+    if len(sauces_selections) > 0: 
+        df_sauces_selections = pd.DataFrame(saucse_selections)
     with st.expander("Dairy"):
         grid_dairy = build_grid(df.query("category == 'dairy'"))
     dairy_selections = grid_dairy['selected_rows']
