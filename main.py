@@ -61,6 +61,7 @@ col_l, col_r = st.columns([5, 3])  # col_l is larger
 df_everything = pd.read_csv("food_wine_pairing.csv", encoding='unicode_escape')
 # prep the dataframe for display by parsing it into just the columns 'category' and 'name'
 df = df_everything[['category', 'name']]
+df_selections_list = [] # to store the df_xxx_selections dataframes 
 # and display parsed versions of the dataframe on the left side of the page
 with col_l:
     with st.expander("Meat"):
@@ -68,51 +69,61 @@ with col_l:
     meat_selections = grid_meat['selected_rows']
     if len(meat_selections) > 0: # if user selected any meats
         df_meat_selections = pd.DataFrame(meat_selections) # pass selected rows to new dataframe
+        df_selections_list.append(df_meat_selections)
     with st.expander("Meat Cooking Method"):
         grid_preparation = build_grid(df.query("category == 'preparation'"))
     preparation_selections = grid_preparation['selected_rows']
     if len(preparation_selections) > 0: 
         df_preparation_selections = pd.DataFrame(preparation_selections)
+        df_selections_list.append(df_preparation_selections)
     with st.expander("Sauces"):
         grid_sauces = build_grid(df.query("category == 'sauces'"))
     sauces_selections = grid_sauces['selected_rows']
     if len(sauces_selections) > 0: 
-        df_sauces_selections = pd.DataFrame(saucse_selections)
+        df_sauces_selections = pd.DataFrame(sauces_selections)
+        df_selections_list.append(df_sauces_selections)
     with st.expander("Dairy"):
         grid_dairy = build_grid(df.query("category == 'dairy'"))
     dairy_selections = grid_dairy['selected_rows']
     if len(dairy_selections) > 0: 
         df_dairy_selections = pd.DataFrame(dairy_selections)
+        df_selections_list.append(df_dairy_selections)
     with st.expander("Pizza"):
         grid_pizza = build_grid(df.query("category == 'pizza'"))
     pizza_selections = grid_pizza['selected_rows']
     if len(pizza_selections) > 0: 
         df_pizza_selections = pd.DataFrame(pizza_selections)
+        df_selections_list.append(df_pizza_selections)
     with st.expander("Pasta"):
         grid_pasta = build_grid(df.query("category == 'pasta'"))
     pasta_selections = grid_pasta['selected_rows']
     if len(pasta_selections) > 0: 
         df_pasta_selections = pd.DataFrame(pasta_selections)
+        df_selections_list.append(df_pasta_selections)
     with st.expander("Vegetables"):
         grid_vegetables = build_grid(df.query("category == 'vegetable'"))
     vegetables_selections = grid_vegetables['selected_rows']
     if len(vegetables_selections) > 0: 
         df_vegetables_selections = pd.DataFrame(vegetables_selections)
+        df_selections_list.append(df_vegetables_selections)
     with st.expander("Seasonings"):
         grid_seasonings = build_grid(df.query("category == 'seasoning'"))
     seasonings_selections = grid_seasonings['selected_rows']
     if len(seasonings_selections) > 0: 
         df_seasonings_selections = pd.DataFrame(seasonings_selections)
+        df_selections_list.append(df_seasonings_selections)
     with st.expander("Starches"):
         grid_starches = build_grid(df.query("category == 'starch'"))
     starches_selections = grid_starches['selected_rows']
     if len(starches_selections) > 0: 
         df_starches_selections = pd.DataFrame(starches_selections)
+        df_selections_list.append(df_starches_selections)
     with st.expander("Sweets"):
         grid_sweets = build_grid(df.query("category == 'sweets'"))
     sweets_selections = grid_sweets['selected_rows']
     if len(sweets_selections) > 0: 
         df_sweets_selections = pd.DataFrame(sweets_selections)
+        df_selections_list.append(df_sweets_selections)
     
 # and display the parsed dataframe in a grid, on the left side of the page
 with col_l:
@@ -128,12 +139,10 @@ with col_r:
         
     if len(selections) > 0:  # if user selected anything
         df_selections = pd.DataFrame(selections)  # pass the selected rows to a new dataframe
-        # if user selected anything
-        if len(selections) > 0:
-            if len(meat_selections) > 0:
-                df_selections = pd.concat([df_selections, df_meat_selections])
-            df_selection_names = df_selections[['name']]  # Make a dataframe with just the 'name' column
-            grid_selections = build_grid(df_selection_names)  # display selections in a grid on the right side of page
+        if len(meat_selections) > 0:
+            df_selections = pd.concat([df_selections, df_meat_selections])
+        df_selection_names = df_selections[['name']]  # Make a dataframe with just the 'name' column
+        grid_selections = build_grid(df_selection_names)  # display selections in a grid on the right side of page
     else:  # user has not selected anything
         st.write('Nothing selected to display')
 
