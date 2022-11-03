@@ -64,6 +64,7 @@ df = df_everything[['category', 'name']]
 with col_l:
     with st.expander("Meat"):
         grid_meat = build_grid(df.query("category == 'meat'"))
+meat_selections = grid_meat['selected_rows']
 # and display the parsed dataframe in a grid, on the left side of the page
 with col_l:
     grid_main = build_grid(df)
@@ -75,10 +76,15 @@ selections = grid_main['selected_rows']
 
 # ********* PRINT THE RIGHT GRID **********
 with col_r:
+    if len(meat_selections) > 0: # if user selected any meats
+        df_meat_selections = pd.DataFrame(meat_selections) # pass selected rows to new dataframe
+        
     if len(selections) > 0:  # if user selected anything
         df_selections = pd.DataFrame(selections)  # pass the selected rows to a new dataframe
         # if user selected anything
         if len(selections) > 0:
+            if len(meat_selections) > 0:
+                df_selections = pd.concat([df_selections, df_meat_selections])
             df_selection_names = df_selections[['name']]  # Make a dataframe with just the 'name' column
             grid_selections = build_grid(df_selection_names)  # display selections in a grid on the right side of page
     else:  # user has not selected anything
