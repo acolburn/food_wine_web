@@ -156,7 +156,7 @@ with col_r:
 # ********** PRINT HEADER **********
 st.write("## SPECIFIC SUGGESTIONS")
 
-if len(selections) > 0:  # if user selected anything
+if len(df_selections_list) > 0:  # if user selected anything
     # number of items in df_selections = df_selections.shape[0]
     # so, in other words, we are looping through all the items the user selected
     for i in range(df_selections.shape[0]):
