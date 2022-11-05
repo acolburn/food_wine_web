@@ -157,21 +157,15 @@ with col_r:
 st.write("## SPECIFIC SUGGESTIONS")
 
 if len(df_selections_list) > 0:  # if user selected anything
-    # number of items in df_selections = df_selections.shape[0]
-    # so, in other words, we are looping through all the items the user selected
-    for i in range(df_selections.shape[0]):
-        # this line finds the 'name' cell's value for an item
-        sel = df_selections.loc[i]['name']
-        # this line finds the row 'sel' in df_everything
-        row = df_everything.loc[df['name'] == sel]
-        # this line returns a [list] to the aList variable
-        aList = row['specific suggestions'].values
-        # this line turns the list into a comma separated string, assuming it's not empty
-        # lists that are empty, or NaN in this case, throw a KeyError
-        # pd.isna(aList) returns True if the value is NaN ... we don't want those
-        # we only want the ones where something is present in the 'specific suggestions' cell
-        if not pd.isna(aList):
-            st.markdown("**" + ','.join(aList).upper() + "** is suggested for **" + sel.upper() + "**")
+    # temp has the rows from df_everything matching the selections
+    temp = df_everything[df_everything['name'].isin(df_selection_names["name"])]
+    # selections with specific suggestions would be the rows where 'specific suggestions' cell is NOT NaN
+    df_specific_suggestions = temp.dropna(subset = ['specific suggestions'])
+    # st.write(df_specific_suggestions[['name', 'specific suggestions']])
+    names = df_specific_suggestions['name'].values.tolist()
+    suggestions = df_specific_suggestions['specific suggestions'].values.tolist()
+    for i in range(df_specific_suggestions.shape[0]):
+        st.write(suggestions[i].upper() + ' is suggested for ' + names[i].upper())
 else:
     st.write('No specific suggestions yet.')
 
