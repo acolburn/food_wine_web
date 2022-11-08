@@ -59,8 +59,8 @@ col_l, col_r = st.columns([5, 3])  # col_l is larger
 # ********** PRINT THE LEFT GRID *********
 # convert the spreadsheet into a dataframe
 df_everything = pd.read_csv("food_wine_pairing.csv", encoding='unicode_escape')
-# prep the dataframe for display by parsing it into just the column'name'
-df = df_everything[['name']]
+# prep the dataframe for display by parsing it into just the columns 'category' and 'name'
+df = df_everything[['category', 'name']]
 df_selections_list = [] # to store the df_xxx_selections dataframes 
 # and display parsed versions of the dataframe on the left side of the page
 with col_l:
